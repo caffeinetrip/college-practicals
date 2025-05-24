@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="catalog-intro-section">
+    <div class="card">
+        <h2>🛍️ Full Catalog</h2>
+        <p>Discover our complete range of magical and mundane pet products. Whether your companion has fur, feathers, scales, or something stranger—we’ve got you covered.</p>
+    </div>
+</section>
+
+<section class="all-products">
+    <h2 style="text-align: center; margin-bottom: 2rem;">All Products</h2>
+    <div class="grid">
+        {% for product in products %}
+        <div class="card product-card corner-tag">
+            <h3>{{ product.name }}</h3>
+            <p class="product-price">£{{ product.price }}0</p>
+            <div style="margin-top: 1rem;">
+                <a href="{% url 'product_detail' product.id %}" class="btn btn-outline">View Details</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="card">
+            <p>No products available at the moment. Please check back later!</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

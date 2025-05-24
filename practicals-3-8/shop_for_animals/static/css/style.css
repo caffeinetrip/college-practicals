@@ -450,3 +450,18 @@ section {
 .icon-wrapper:hover .icon-swap {
     background-image: url('/static/media/love.png');
 }
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+.cart-table th, .cart-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+.cart-summary {
+    text-align: right;
+    margin-top: 1.5rem;
+}
