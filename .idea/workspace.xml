@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6088c323-6eb2-4090-a895-fc58f207e64a" name="Changes" comment="fix: ticker movement">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/static/css/style.css" afterDir="false" />
-    </list>
+    <list default="true" id="6088c323-6eb2-4090-a895-fc58f207e64a" name="Changes" comment="add: i am added ^^" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,7 +116,7 @@
       <updated>1748096502538</updated>
       <workItem from="1748096505460" duration="160000" />
       <workItem from="1748096895563" duration="1690000" />
-      <workItem from="1748107124238" duration="17500000" />
+      <workItem from="1748107124238" duration="17813000" />
     </task>
     <task id="LOCAL-00001" summary="add: 1 practical complete, repo initialized">
       <option name="closed" value="true" />
@@ -178,7 +174,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748124142709</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="add: i am added ^^">
+      <option name="closed" value="true" />
+      <created>1748125769640</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1748125769640</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,7 +195,8 @@
     <MESSAGE value="add: base page template, homepage, css style, views, products list" />
     <MESSAGE value="add: ticker, smooth angles" />
     <MESSAGE value="fix: ticker movement" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: ticker movement" />
+    <MESSAGE value="add: i am added ^^" />
+    <option name="LAST_COMMIT_MESSAGE" value="add: i am added ^^" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
