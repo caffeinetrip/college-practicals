@@ -18,6 +18,7 @@
         <div class="card product-card corner-tag">
             <h3>{{ product.name }}</h3>
             <p class="product-price">£{{ product.price }}0</p>
+            <p class="product-description">{{ product.description }}</p>
             <div style="margin-top: 1rem;">
                 <a href="{% url 'product_detail' product.id %}" class="btn btn-outline">Details</a>
             </div>
