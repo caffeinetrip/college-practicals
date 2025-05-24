@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="welcome-section">
+    <div class="card">
+        <h2>🏠 Welcome to Soma Animals!</h2>
+        <p>Your trusted companion in pet wellness. We offer a wide range of unique products, expert advice, and convenient services to care for your creature’s needs.</p>
+        <div style="margin-top: 1rem;">
+            <a href="{% url 'catalog' %}" class="btn btn-primary">🛒 Browse Catalog</a>
+        </div>
+    </div>
+</section>
+
+<section class="featured-products">
+    <h2 style="text-align: center; margin-bottom: 2rem;">Popular Products</h2>
+    <div class="grid">
+        {% for product in featured_products %}
+        <div class="card product-card corner-tag">
+            <h3>{{ product.name }}</h3>
+            <p class="product-price">£{{ product.price }}0</p>
+            <div style="margin-top: 1rem;">
+                <a href="{% url 'product_detail' product.id %}" class="btn btn-outline">Details</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="services-section">
+    <h2 style="text-align: center; margin-bottom: 2rem;">Our Services</h2>
+    <div class="grid">
+        <div class="card corner-tag">
+            <h3>🩺 Expert Consultations</h3>
+            <p>Our certified pet pharmacists offer detailed guidance on exotic and experimental pet products.</p>
+        </div>
+
+        <div class="card corner-tag">
+            <h3>🚚 Fast Delivery</h3>
+            <p>Get your order within 2 hours in the city. Free shipping for orders over £12.00.</p>
+        </div>
+
+        <div class="card corner-tag">
+            <h3>📊 Vital Checkups</h3>
+            <p>Free monitoring of heartbeat, fur glow, and inner radiance levels.</p>
+        </div>
+
+        <div class="card corner-tag">
+            <h3>🕐 24/7 Support</h3>
+            <p>Emergency help and consultations available any time of day or night.</p>
+        </div>
+
+        <div class="card corner-tag">
+            <h3>🧪 Ritual Prep Services</h3>
+            <p>We prepare pets for full moon rituals and seasonal transformations.</p>
+        </div>
+
+        <div class="card corner-tag">
+            <h3>🎭 Personality Mapping</h3>
+            <p>Analyze and visualize your pet’s emotional spectrum and hidden fears.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

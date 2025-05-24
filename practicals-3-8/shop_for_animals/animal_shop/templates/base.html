@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="animated-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-text">Soma Animals</span>
+                </div>
+
+                <p class="sub-logo">"A snack for every state of being"</p>
+
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="{% url 'home' %}" class="nav-link">Homepage</a></li>
+                        <li><a href="{% url 'catalog' %}" class="nav-link">Catalog</a></li>
+                        <li><a href="{% url 'cart' %}" class="nav-link">Cart</a></li>
+                        <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            {% block page_header %}
+            <div class="page-header">
+                <h1 class="page-title">
+                    {% for letter in page_name %}
+                        <span class="jump-letter">{{ letter }}</span>
+                    {% endfor %}
+                </h1>
+            </div>
+            {% endblock %}
+
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contacts</h4>
+                    <p>15 Sinagawa St., Kyoto</p>
+                    <p>+380 11 111-11-11</p>
+                    <p>caffeinetrip.soma@gmail.com</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Working Hours</h4>
+                    <p>Mon–Fri: 8:00 AM – 10:00 PM</p>
+                    <p>Sat–Sun: 9:00 AM – 9:00 PM</p>
+                    <p>Emergency assistance: 24/7</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>Site was created 24 May 2025</p>
+                    <p>For Fun with %!@#</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 caffeinetrip. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
