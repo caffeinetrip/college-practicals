@@ -106,7 +106,8 @@ body {
     background-color: var(--clay);
     border: 4px solid var(--teal);
     box-shadow: 4px 4px 0 var(--teal);
-    margin-top: 2rem;
+    margin-top: 0.25rem;
+    border-radius: 12px;
 }
 
 .animated-header::before {
@@ -271,6 +272,7 @@ body {
     margin-top: 3rem;
     border-top: 4px solid var(--clay);
     font-size: var(--fs-small);
+    border-radius: 12px;
 }
 
 .footer-content {
@@ -370,3 +372,38 @@ section {
         background-position: 100px 100px, 100px 100px, 200px 200px, 250px 250px;
     }
 }
+
+.top-ticker {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--teal);
+    color: var(--bg);
+    border-bottom: 4px solid var(--plum);
+    padding: 0.4rem 0;
+    font-size: var(--fs-small);
+    font-family: 'Press Start 2P', monospace;
+    white-space: nowrap;
+    position: relative;
+    z-index: 999;
+    border-radius: 8px 8px 4px 4px;
+}
+
+.ticker-track {
+    animation: tickerLoop 90s linear infinite;
+    opacity: 0.6;
+}
+
+.ticker-text {
+    padding-right: 4rem;
+    white-space: nowrap;
+}
+
+@keyframes tickerLoop {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
