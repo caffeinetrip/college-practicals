@@ -56,7 +56,7 @@ body {
     image-rendering: pixelated;
     line-height: 1.6;
     font-size: var(--fs-base);
-    padding: 1rem;
+    padding: 0.25rem 1rem 0.25rem 1rem;
 }
 
 .logo-text {
@@ -284,9 +284,6 @@ body {
 
 section {
     margin-bottom: 4rem;
-}
-
-section {
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 0.8s ease-out forwards;
@@ -377,8 +374,8 @@ section {
     width: 100%;
     overflow: hidden;
     background-color: var(--teal);
-    color: var(--bg);
-    border-bottom: 4px solid var(--plum);
+    color: rgba(246, 237, 205, 0.5);
+    border-bottom: 4px solid rgba(101, 80, 87, 0.3);
     padding: 0.4rem 0;
     font-size: var(--fs-small);
     font-family: 'Press Start 2P', monospace;
@@ -388,17 +385,19 @@ section {
     border-radius: 8px 8px 4px 4px;
 }
 
-.ticker-track {
-    animation: tickerLoop 90s linear infinite;
+.ticker-content {
+    padding-right: 4rem;
+    flex-shrink: 0;
     opacity: 0.6;
 }
 
-.ticker-text {
-    padding-right: 4rem;
-    white-space: nowrap;
+.ticker-track {
+    display: flex;
+    width: max-content;
+    animation: tickerMove 40s linear infinite;
 }
 
-@keyframes tickerLoop {
+@keyframes tickerMove {
     0% {
         transform: translateX(0%);
     }
@@ -406,4 +405,5 @@ section {
         transform: translateX(-50%);
     }
 }
+
 
