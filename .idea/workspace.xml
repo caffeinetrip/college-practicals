@@ -4,10 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6088c323-6eb2-4090-a895-fc58f207e64a" name="Changes" comment="add: 4 practical complete, catalog page template, cart page template, about page">
+    <list default="true" id="6088c323-6eb2-4090-a895-fc58f207e64a" name="Changes" comment="add: models (category, product), homapage products description">
+      <change afterPath="$PROJECT_DIR$/animal_shop/commands/from_yaml.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/animal_shop/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/animal_shop/templates/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/animal_shop/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/animal_shop/templates/cart.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/animal_shop/templates/catalog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/animal_shop/templates/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/animal_shop/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/animal_shop/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangoApp/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangoApp/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangoApp/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangoApp/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/love.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/peace.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site_data/products_data.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practical-1/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practical-2/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/info.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates/about.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates/cart.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates/catalog.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates/product_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/manage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/shop_for_animals/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/animal_shop/templates/product_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/shop_for_animals/asgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/shop_for_animals/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/shop_for_animals/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoApp/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/shop_for_animals/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/static/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/static/media/love.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/static/media/peace.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practicals-3-8/shop_for_animals/static/site_data/products_data.yaml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +96,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "django.template.preview.state": "SHOW_EDITOR",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "django-2.2-webtech",
     "last_opened_file_path": "/home/psykos/Documents/other/tfk-lntu-practicals",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -68,6 +108,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/practicals-3-8/shop_for_animals/static/img" />
       <recent name="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates" />
@@ -120,7 +163,12 @@
       <updated>1748096502538</updated>
       <workItem from="1748096505460" duration="160000" />
       <workItem from="1748096895563" duration="1690000" />
-      <workItem from="1748107124238" duration="19891000" />
+      <workItem from="1748107124238" duration="20421000" />
+      <workItem from="1748168902037" duration="7230000" />
+      <workItem from="1748198235990" duration="324000" />
+      <workItem from="1748381793581" duration="630000" />
+      <workItem from="1748636722932" duration="52000" />
+      <workItem from="1749493296389" duration="4414000" />
     </task>
     <task id="LOCAL-00001" summary="add: 1 practical complete, repo initialized">
       <option name="closed" value="true" />
@@ -202,7 +250,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748127109227</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="add: models (category, product), homapage products description">
+      <option name="closed" value="true" />
+      <created>1748128023977</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1748128023977</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,15 +274,21 @@
     <MESSAGE value="add: i am added ^^" />
     <MESSAGE value="fix: image" />
     <MESSAGE value="add: 4 practical complete, catalog page template, cart page template, about page" />
-    <option name="LAST_COMMIT_MESSAGE" value="add: 4 practical complete, catalog page template, cart page template, about page" />
+    <MESSAGE value="add: models (category, product), homapage products description" />
+    <option name="LAST_COMMIT_MESSAGE" value="add: models (category, product), homapage products description" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/practicals-3-8/shop_for_animals/shop_for_animals/wsgi.py</url>
+          <url>file://$PROJECT_DIR$/practicals-3-8/shop_for_animals/djangoApp/wsgi.py</url>
           <line>9</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file:///usr/lib64/python3.13/importlib/__init__.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
