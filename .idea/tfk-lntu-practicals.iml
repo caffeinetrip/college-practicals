@@ -8,7 +8,7 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates" />
+        <option value="$MODULE_DIR$/main_app/templates" />
       </list>
     </option>
   </component>

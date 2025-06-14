@@ -1,0 +1,119 @@
+{% extends 'main_app/base.html' %}
+
+{% block content %}
+<section class="checkout-section">
+    <div class="card">
+        <h2>💳 Оформлення замовлення</h2>
+        <p>Заповніть форму для завершення покупки</p>
+
+        <div style="margin-top: 1rem;">
+            <a href="{% url 'cart' %}" class="btn btn-outline">
+                ← Повернутися до кошика
+            </a>
+        </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 2rem;">
+        <div class="card">
+            <form method="post" action="{% url 'place_order' %}">
+                {% csrf_token %}
+
+                <div class="alert alert-info" style="margin-bottom: 1.5rem;">
+                    ℹ️ Поля позначені зірочкою (*) є обов'язковими
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <h3>👤 Контактна інформація</h3>
+                    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                        <div>
+                            <label class="form-label required-field">Повне ім'я *</label>
+                            <input type="text" name="customer_name" class="form-control" required>
+                        </div>
+                        <div>
+                            <label class="form-label required-field">Номер телефону *</label>
+                            <input type="tel" name="customer_phone" class="form-control" required>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="customer_email" class="form-control">
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <h3>🏠 Адреса доставки</h3>
+                    <div style="margin-top: 1rem;">
+                        <label class="form-label required-field">Повна адреса *</label>
+                        <textarea name="delivery_address" class="form-control" rows="3" required></textarea>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <h3>📝 Додаткова інформація</h3>
+                    <div style="margin-top: 1rem;">
+                        <label class="form-label">Примітки до замовлення</label>
+                        <textarea name="notes" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    ✅ Підтвердити замовлення
+                </button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>🧾 Ваше замовлення</h3>
+
+            <div style="margin-top: 1rem;">
+                {% for item in cart_items %}
+                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                    <div>
+                        <strong>{{ item.product.name }}</strong>
+                        <div style="font-size: 0.9rem; color: #666;">{{ item.quantity }} × {{ item.product.price }} грн</div>
+                    </div>
+                    <div>{{ item.total }} грн</div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div style="margin-top: 1.5rem; text-align: right;">
+                <div style="font-size: 1.2rem; font-weight: bold;">{{ total_price }} грн</div>
+                <div>Загальна сума</div>
+            </div>
+
+            <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+                <div style="color: #28a745; font-weight: bold;">
+                    🚚 Безкоштовна доставка
+                </div>
+                <small style="color: #666;">
+                    Доставка протягом 1-2 робочих днів
+                </small>
+            </div>
+
+            <div style="margin-top: 1rem; padding: 1rem; background: #f0fff0; border-radius: 8px;">
+                <div style="font-weight: bold;">🛡️ Гарантія якості</div>
+                <small>Всі товари сертифіковані</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .required-field::after {
+        content: " *";
+        color: red;
+    }
+    .form-control {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+</style>
+{% endblock %}

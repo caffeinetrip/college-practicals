@@ -4,17 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6088c323-6eb2-4090-a895-fc58f207e64a" name="Changes" comment="changed: Django Version: 2.2.12&#10;Python Version: 3.8.10">
+    <list default="true" id="6088c323-6eb2-4090-a895-fc58f207e64a" name="Changes" comment="fix: work on py 3.12, django 4.10. cloudflare connected">
+      <change beforePath="$PROJECT_DIR$/.idea/tfk-lntu-practicals.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tfk-lntu-practicals.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/animal_shop/commands/from_yaml.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/animal_shop/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/animal_shop/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal_shop/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal_shop/templates/about.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal_shop/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal_shop/templates/cart.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal_shop/templates/catalog.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal_shop/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal_shop/templates/product_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal_shop/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal_shop/views.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangoApp/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangoApp/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangoApp/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangoApp/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangoApp/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/main_app/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/main_app/checkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/main_app/order_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/main_app/order_success.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/love.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/peace.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/site_data/products_data.yaml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,39 +60,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Django Server.tfk-lntu-practicals.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.main.executor": "Run",
-    "Python.urls.executor": "Run",
-    "Python.views.executor": "Run",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "django.template.preview.state": "SHOW_EDITOR",
-    "git-widget-placeholder": "django-2.2-webtech",
-    "last_opened_file_path": "/home/psykos/Documents/other/tfk-lntu-practicals",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Django Server.tfk-lntu-practicals.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.urls.executor&quot;: &quot;Run&quot;,
+    &quot;Python.views.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;django-2.2-webtech&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/psykos/Documents/other/tfk-lntu-practicals&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/main_app/static" />
+      <recent name="$PROJECT_DIR$/static/media" />
       <recent name="$PROJECT_DIR$/practicals-3-8/shop_for_animals/static/img" />
       <recent name="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates" />
       <recent name="$PROJECT_DIR$/practicals-3-8/shop_for_animals/animal_shop/templates/animal_shop" />
-      <recent name="$PROJECT_DIR$/practicals-3-8/shop_for_animals" />
-      <recent name="$PROJECT_DIR$/practicals-3-8" />
     </key>
   </component>
   <component name="RunManager">
@@ -135,7 +144,9 @@
       <workItem from="1748198235990" duration="324000" />
       <workItem from="1748381793581" duration="630000" />
       <workItem from="1748636722932" duration="52000" />
-      <workItem from="1749493296389" duration="12599000" />
+      <workItem from="1749493296389" duration="30041000" />
+      <workItem from="1749620486579" duration="1343000" />
+      <workItem from="1749920539090" duration="339000" />
     </task>
     <task id="LOCAL-00001" summary="add: 1 practical complete, repo initialized">
       <option name="closed" value="true" />
@@ -233,7 +244,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749497830509</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fix: work on py 3.12, django 4.10. cloudflare connected">
+      <option name="closed" value="true" />
+      <created>1749509031352</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1749509031352</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,7 +270,8 @@
     <MESSAGE value="add: 4 practical complete, catalog page template, cart page template, about page" />
     <MESSAGE value="add: models (category, product), homapage products description" />
     <MESSAGE value="changed: Django Version: 2.2.12&#10;Python Version: 3.8.10" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed: Django Version: 2.2.12&#10;Python Version: 3.8.10" />
+    <MESSAGE value="fix: work on py 3.12, django 4.10. cloudflare connected" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: work on py 3.12, django 4.10. cloudflare connected" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -265,6 +285,10 @@
           <url>file:///usr/lib64/python3.13/importlib/__init__.py</url>
           <line>11</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main_app/urls.py</url>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

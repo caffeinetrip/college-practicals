@@ -1,0 +1,104 @@
+{% extends 'main_app/base.html' %}
+
+{% block content %}
+<section class="success-section">
+    <div class="card" style="text-align: center;">
+        <h2>🎉 Замовлення оформлено!</h2>
+        <p>Дякуємо за покупку в Soma Animals! Ми вже працюємо над вашим замовленням.</p>
+    </div>
+
+    <div class="card" style="margin-top: 2rem;">
+        <h3><i class="bi bi-receipt"></i> Номер замовлення: #{{ order.id }}</h3>
+        <p><i class="bi bi-calendar"></i> Дата: {{ order.created_at|date:"d.m.Y H:i" }}</p>
+    </div>
+
+    <div class="grid" style="margin-top: 2rem;">
+        <div class="card">
+            <h4><i class="bi bi-person"></i> Контактна інформація</h4>
+            <p><strong>{{ order.customer_name }}</strong></p>
+            <p><i class="bi bi-telephone"></i> {{ order.customer_phone }}</p>
+            {% if order.customer_email %}
+            <p><i class="bi bi-envelope"></i> {{ order.customer_email }}</p>
+            {% endif %}
+        </div>
+
+        <div class="card">
+            <h4><i class="bi bi-geo-alt"></i> Адреса доставки</h4>
+            <p>{{ order.delivery_address }}</p>
+        </div>
+
+        {% if order.notes %}
+        <div class="card">
+            <h4><i class="bi bi-chat-text"></i> Примітки</h4>
+            <p>{{ order.notes }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="card" style="margin-top: 2rem;">
+        <h4><i class="bi bi-bag"></i> Замовлені товари</h4>
+        <div class="grid">
+            {% for item in order.items.all %}
+            <div class="product-card">
+                <h5>{{ item.product.name }}</h5>
+                <p>{{ item.quantity }} шт. × {{ item.price }} грн</p>
+                <strong>{{ item.total_price }} грн</strong>
+            </div>
+            {% endfor %}
+        </div>
+        <hr>
+        <p><strong>Загальна сума: {{ order.total_amount }} грн</strong></p>
+    </div>
+
+    <div class="card" style="margin-top: 2rem;">
+        <h4><i class="bi bi-list-check"></i> Що далі?</h4>
+        <ol>
+            <p><strong>Підтвердження:</strong> Ми зв’яжемось із вами протягом години.</p>
+            <p><strong>Комплектація:</strong> Ми підготуємо ваше замовлення.</p>
+            <p><strong>Доставка:</strong> Отримаєте замовлення за 1–2 дні.</p>
+        </ol>
+    </div>
+
+    <div class="card" style="margin-top: 2rem; text-align: center;">
+        <a href="{% url 'products' %}" class="btn btn-primary">🛒 Продовжити покупки</a>
+        <a href="{% url 'home' %}" class="btn btn-outline" style="margin-left: 1rem;">🏠 На головну</a>
+    </div>
+
+    <div class="card" style="margin-top: 2rem;">
+        <h5><i class="bi bi-headset"></i> Потрібна допомога?</h5>
+        <p>Телефонуйте або пишіть нам:</p>
+        <p>
+            <a href="tel:+380441234567" style="color: #28a745;"><i class="bi bi-telephone-fill"></i> +38 (044) 123-45-67</a><br>
+            <a href="mailto:info@blin-animals.ua" style="color: #28a745;"><i class="bi bi-envelope-fill"></i> info@blin-animals.ua</a>
+        </p>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        const confetti = document.createElement('div');
+        confetti.innerHTML = '🎊🎉✨🎊🎉✨🎊🎉✨';
+        confetti.style.position = 'fixed';
+        confetti.style.top = '20px';
+        confetti.style.left = '50%';
+        confetti.style.transform = 'translateX(-50%)';
+        confetti.style.fontSize = '2rem';
+        confetti.style.animation = 'fall 3s ease-out forwards';
+        confetti.style.zIndex = '9999';
+        confetti.style.pointerEvents = 'none';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
+    }, 500);
+
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fall {
+            0% { transform: translateX(-50%) translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateX(-50%) translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script>
+{% endblock %}
