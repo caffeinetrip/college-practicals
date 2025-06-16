@@ -2,132 +2,137 @@
 {% load static %}
 
 {% block content %}
-<section class="welcome-section" style="margin-bottom: -2rem">
-    <h2 style="text-align: center;">Checkout</h2>
+<section class="welcome-section">
+    <h2>Checkout</h2>
 </section>
 
 <div class="container">
     <div class="product-page-wrapper">
-        <div class="checkout-wrapper" style="display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--spacing-unit) * 2); margin-bottom: calc(var(--spacing-unit) * 2);">
-
-            <!-- Order Form -->
-            <div class="checkout-form card">
+        <div class="product-showcase grid-2col">
+            <div class="card product-info">
                 <div class="section-header">
                     <h3>📋 Order Information</h3>
                     <div class="header-line"></div>
                 </div>
 
-                <form method="post" class="order-form" style="padding: var(--spacing-unit);">
+                <form method="post" class="comment-form">
                     {% csrf_token %}
-
-                    <div class="form-group" style="margin-bottom: var(--spacing-unit);">
-                        <label for="{{ form.customer_name.id_for_label }}" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">{{ form.customer_name.label }}</label>
-                        {{ form.customer_name }}
-                        {% if form.customer_name.errors %}
-                            <div class="error-message" style="color: var(--coral); font-size: var(--fs-small); margin-top: 0.25rem;">
-                                {{ form.customer_name.errors.0 }}
-                            </div>
-                        {% endif %}
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <label for="{{ form.customer_name.id_for_label }}" class="spec-label">{{ form.customer_name.label }}</label>
+                            {{ form.customer_name }}
+                            {% if form.customer_name.errors %}
+                                <div class="error-message">{{ form.customer_name.errors.0 }}</div>
+                            {% endif %}
+                        </div>
                     </div>
 
-                    <div class="form-group" style="margin-bottom: var(--spacing-unit);">
-                        <label for="{{ form.customer_phone.id_for_label }}" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">{{ form.customer_phone.label }}</label>
-                        {{ form.customer_phone }}
-                        {% if form.customer_phone.errors %}
-                            <div class="error-message" style="color: var(--coral); font-size: var(--fs-small); margin-top: 0.25rem;">
-                                {{ form.customer_phone.errors.0 }}
-                            </div>
-                        {% endif %}
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <label for="{{ form.customer_phone.id_for_label }}" class="spec-label">{{ form.customer_phone.label }}</label>
+                            {{ form.customer_phone }}
+                            {% if form.customer_phone.errors %}
+                                <div class="error-message">{{ form.customer_phone.errors.0 }}</div>
+                            {% endif %}
+                        </div>
                     </div>
 
-                    <div class="form-group" style="margin-bottom: var(--spacing-unit);">
-                        <label for="{{ form.customer_email.id_for_label }}" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">{{ form.customer_email.label }}</label>
-                        {{ form.customer_email }}
-                        {% if form.customer_email.errors %}
-                            <div class="error-message" style="color: var(--coral); font-size: var(--fs-small); margin-top: 0.25rem;">
-                                {{ form.customer_email.errors.0 }}
-                            </div>
-                        {% endif %}
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <label for="{{ form.customer_email.id_for_label }}" class="spec-label">{{ form.customer_email.label }}</label>
+                            {{ form.customer_email }}
+                            {% if form.customer_email.errors %}
+                                <div class="error-message">{{ form.customer_email.errors.0 }}</div>
+                            {% endif %}
+                        </div>
                     </div>
 
-                    <div class="form-group" style="margin-bottom: var(--spacing-unit);">
-                        <label for="{{ form.delivery_address.id_for_label }}" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">{{ form.delivery_address.label }}</label>
-                        {{ form.delivery_address }}
-                        {% if form.delivery_address.errors %}
-                            <div class="error-message" style="color: var(--coral); font-size: var(--fs-small); margin-top: 0.25rem;">
-                                {{ form.delivery_address.errors.0 }}
-                            </div>
-                        {% endif %}
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <label for="{{ form.delivery_address.id_for_label }}" class="spec-label">{{ form.delivery_address.label }}</label>
+                            {{ form.delivery_address }}
+                            {% if form.delivery_address.errors %}
+                                <div class="error-message">{{ form.delivery_address.errors.0 }}</div>
+                            {% endif %}
+                        </div>
                     </div>
 
-                    <div class="form-group" style="margin-bottom: var(--spacing-unit);">
-                        <label for="{{ form.notes.id_for_label }}" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">{{ form.notes.label }}</label>
-                        {{ form.notes }}
-                        {% if form.notes.errors %}
-                            <div class="error-message" style="color: var(--coral); font-size: var(--fs-small); margin-top: 0.25rem;">
-                                {{ form.notes.errors.0 }}
-                            </div>
-                        {% endif %}
+                    <div class="form-group">
+                        <div class="textarea-wrapper">
+                            <label for="{{ form.notes.id_for_label }}" class="spec-label">{{ form.notes.label }}</label>
+                            {{ form.notes }}
+                            {% if form.notes.errors %}
+                                <div class="error-message">{{ form.notes.errors.0 }}</div>
+                            {% endif %}
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: var(--spacing-unit); font-size: var(--fs-medium); margin-top: var(--spacing-unit);">
+                    <button type="submit" class="btn btn-primary">
                         <span class="btn-icon">📦</span>
                         <span class="btn-text">Place Order</span>
                     </button>
                 </form>
             </div>
 
-            <!-- Order Summary -->
-            <div class="order-summary card">
+            <div class="card product-info">
                 <div class="section-header">
                     <h3>📊 Order Summary</h3>
                     <div class="header-line"></div>
                 </div>
 
-                <div class="summary-items" style="padding: var(--spacing-unit);">
+                <div class="summary-items">
                     {% for item in cart_items %}
-                    <div class="summary-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: var(--border-width) solid var(--sage);">
+                    <div class="summary-item">
                         <div class="item-info">
-                            <h5 style="margin: 0; font-size: var(--fs-small);">{{ item.product.name }}</h5>
-                            <p style="margin: 0; font-size: var(--fs-small); color: var(--plum);">£{{ item.price }} × {{ item.quantity }}</p>
+                            <h5 class="card-title">{{ item.product.name }}</h5>
+                            <div class="card-price">
+                                <span class="price-symbol">£</span>
+                                <span class="price-amount">{{ item.price }}</span>
+                                <span class="spec-label">× {{ item.quantity }}</span>
+                            </div>
                         </div>
-                        <div class="item-total" style="font-weight: bold;">
-                            £{{ item.total|floatformat:2 }}
+                        <div class="item-total card-price">
+                            <span class="price-symbol">£</span>
+                            <span class="price-amount">{{ item.total|floatformat:2 }}</span>
                         </div>
                     </div>
                     {% endfor %}
 
-                    <div class="summary-total" style="margin-top: var(--spacing-unit); padding-top: var(--spacing-unit); border-top: 2px solid var(--plum);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h3 style="margin: 0;">Total Amount:</h3>
-                            <h3 style="margin: 0; color: var(--plum);">£{{ total_amount|floatformat:2 }}</h3>
+                    <div class="summary-total">
+                        <div class="price-section">
+                            <h3>Total Amount:</h3>
+                            <div class="card-price">
+                                <span class="price-symbol">£</span>
+                                <span class="price-amount">{{ total_amount|floatformat:2 }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="payment-info" style="padding: var(--spacing-unit); background-color: var(--sage); margin: var(--spacing-unit); border-radius: var(--border-radius);">
-                    <h4 style="margin-top: 0;">💳 Payment Information</h4>
-                    <p style="font-size: var(--fs-small); margin: 0;">Payment will be processed upon delivery. We accept cash and card payments.</p>
+                <div class="payment-info card card-stock">
+                    <h4>💳 Payment Information</h4>
+                    <p>Payment will be processed upon delivery. We accept cash and card payments.</p>
                 </div>
             </div>
         </div>
 
-        <div class="checkout-actions" style="text-align: center; margin-top: calc(var(--spacing-unit) * 2);">
+        <div class="back-to-catalog">
             <a href="{% url 'cart' %}" class="btn btn-back">
-                <span>← Back to Cart</span>
+                <span class="back-icon">←</span>
+                <span class="btn-text">Back to Cart</span>
             </a>
         </div>
     </div>
 </div>
 
 {% if form.errors %}
-<div class="form-errors" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
-    <div class="alert alert-error" style="background: var(--coral); color: white; padding: var(--spacing-unit); border-radius: var(--border-radius); max-width: 300px;">
-        <h4 style="margin-top: 0;">Please correct the following errors:</h4>
-        <ul style="margin: 0; padding-left: 1rem;">
+<div class="messages">
+    <div class="alert alert-error">
+        <h4>Please correct the following errors:</h4>
+        <ul>
             {% for field, errors in form.errors.items %}
                 {% for error in errors %}
-                    <li style="font-size: var(--fs-small);">{{ error }}</li>
+                    <li>{{ error }}</li>
                 {% endfor %}
             {% endfor %}
         </ul>
@@ -135,11 +140,13 @@
 </div>
 {% endif %}
 
-<style>
-@media (max-width: 768px) {
-    .checkout-wrapper {
-        grid-template-columns: 1fr !important;
-    }
-}
-</style>
+<script>
+    setTimeout(function() {
+        const messages = document.querySelector('.messages');
+        if (messages) {
+            messages.style.opacity = '0';
+            setTimeout(() => messages.remove(), 500);
+        }
+    }, 5000);
+</script>
 {% endblock %}

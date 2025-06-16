@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="product-actions">
-                    {% if product.in_stock %}
+                    {% if not product.out_of_stock %}
                         <form method="post" action="{% url 'add_to_cart' product.id %}" style="display: flex; gap: var(--spacing-unit); align-items: end;">
                             {% csrf_token %}
                             <div class="quantity-selector" style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -75,14 +75,10 @@
                             </button>
                         </form>
                     {% else %}
-                        <button class="btn" style="background-color: var(--coral); cursor: not-allowed;" disabled>
+                        <button class="btn" style="background-color: var(--red); cursor: not-allowed;" disabled>
                             <span class="btn-text">Out of Stock</span>
                         </button>
                     {% endif %}
-
-                    <a href="{% url 'cart' %}" class="btn btn-back" style="margin-top: var(--spacing-unit);">
-                        <span class="btn-text">View Cart</span>
-                    </a>
                 </div>
             </div>
         </div>
@@ -165,13 +161,13 @@
                                 <span class="price-amount">{{ item.price }}</span>
                             </div>
                             <div class="card-actions">
-                                {% if item.in_stock %}
+                                {% if not item.out_of_stock %}
                                     <form method="post" action="{% url 'add_to_cart' item.id %}" style="display: inline;">
                                         {% csrf_token %}
                                         <button type="submit" class="btn">Buy</button>
                                     </form>
                                 {% else %}
-                                    <button class="btn" style="background-color: var(--coral); cursor: not-allowed;" disabled>Out of Stock</button>
+                                    <button class="btn" style="background-color: var(--clay); cursor: not-allowed;" disabled>Out of Stock</button>
                                 {% endif %}
                                 <a href="{% url 'product_detail' item.id %}" class="btn">Details</a>
                             </div>

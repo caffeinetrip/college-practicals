@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block content %}
-<section class="welcome-section" style="margin-bottom: -2rem">
-    <h2 style="text-align: center;">Welcome to Product Catalog</h2>
+<section class="welcome-section">
+    <h2>Welcome to Product Catalog</h2>
 </section>
 
 <div class="container">
     <div class="product-page-wrapper">
-        <section class="catalog-intro-section" style="margin-bottom: -1rem">
+        <section class="catalog-intro-section">
             <div class="card">
                 <div class="description-header">
                     <h2>
@@ -32,8 +32,8 @@
             </div>
         </section>
 
-        <div class="category-filter card" style="margin-bottom: calc(var(--spacing-unit) * 2); overflow-x: auto; white-space: nowrap; padding: var(--spacing-unit);">
-            <div style="display: inline-flex; gap: calc(var(--spacing-unit) * 0.5);">
+        <div class="category-filter card">
+            <div class="category-filter-content">
                 <a href="{% url 'catalog' %}" class="btn btn-primary {% if not request.GET.category %}active{% endif %}">
                     <span class="btn-text">All</span>
                 </a>
@@ -47,9 +47,9 @@
 
         <!-- Cart Summary Bar -->
         {% if request.session.cart %}
-        <div class="cart-summary-bar card" style="background: var(--sage); margin-bottom: calc(var(--spacing-unit) * 2); padding: var(--spacing-unit); display: flex; justify-content: space-between; align-items: center;">
+        <div class="cart-summary-bar card">
             <div class="cart-info">
-                <span style="font-weight: bold;">🛒 Cart: {{ request.session.cart|length }} item{{ request.session.cart|length|pluralize }}</span>
+                <span>🛒 Cart: <span class="cart-item-count">{{ request.session.cart|length }} item{{ request.session.cart|length|pluralize }}</span></span>
             </div>
             <div class="cart-actions">
                 <a href="{% url 'cart' %}" class="btn btn-primary">View Cart</a>
@@ -59,12 +59,12 @@
 
         <div class="grid">
             {% for product in products %}
-            <div class="card product-card corner-tag" style="margin-bottom: calc(var(--spacing-unit) * 2);">
+            <div class="card product-card corner-tag">
                 <div class="card-image">
                     {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" style="height: 120px; object-fit: cover; border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
                     {% else %}
-                    <div class="product-image" style="height: 120px; background-color: var(--sage); display: flex; align-items: center; justify-content: center; color: var(--plum); font-size: var(--fs-small); border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">No Image</div>
+                    <div class="no-image">No Image</div>
                     {% endif %}
                 </div>
                 <div class="card-content">
@@ -77,17 +77,34 @@
                         <div class="pulse-dot" style="background: {{ product.get_stock_display_color }};"></div>
                         <span>{{ product.get_stock_status_display }}</span>
                     </div>
-                    <div class="card-actions" style="display: flex; gap: calc(var(--spacing-unit) * 0.5); flex-wrap: wrap;">
-                        {% if product.in_stock %}
-                            <form method="post" action="{% url 'add_to_cart' product.id %}" style="display: inline;">
+                    <div class="card-actions">
+                        {% if product.stock_status == 'in_stock' %}
+                            <form method="post" action="{% url 'add_to_cart' product.id %}">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-primary">
                                     <span class="btn-icon">🛒</span>
                                     <span class="btn-text">Add to Cart</span>
                                 </button>
                             </form>
-                        {% else %}
-                            <button class="btn" style="background-color: var(--coral); cursor: not-allowed;" disabled>
+                        {% elif product.stock_status == 'limited' %}
+                            <form method="post" action="{% url 'add_to_cart' product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-limited">
+                                    <span class="btn-icon">🛒</span>
+                                    <span class="btn-text">Add Limited Stock</span>
+                                </button>
+                            </form>
+                        {% elif product.stock_status == 'pre_order' %}
+                            <form method="post" action="{% url 'add_to_cart' product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-pre-order">
+                                    <span class="btn-icon">🛒</span>
+                                    <span class="btn-text">Pre-Order</span>
+                                </button>
+                            </form>
+                        {% elif product.stock_status == 'out_of_stock' %}
+                            <button class="btn btn-out-of-stock" disabled>
+                                <span class="btn-icon">🛒</span>
                                 <span class="btn-text">Out of Stock</span>
                             </button>
                         {% endif %}
@@ -108,22 +125,24 @@
 </div>
 
 {% if messages %}
-<div class="messages" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+<div class="messages">
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}" style="background: {% if message.tags == 'success' %}var(--sage){% elif message.tags == 'error' %}var(--coral){% else %}var(--plum){% endif %}; color: white; padding: var(--spacing-unit); border-radius: var(--border-radius); margin-bottom: 0.5rem; max-width: 300px;">
+    <div class="alert alert-{{ message.tags }}">
         {{ message }}
     </div>
     {% endfor %}
 </div>
 
 <script>
-    setTimeout(function() {
+    document.addEventListener('DOMContentLoaded', () => {
         const messages = document.querySelector('.messages');
         if (messages) {
-            messages.style.opacity = '0';
-            setTimeout(() => messages.remove(), 500);
+            setTimeout(() => {
+                messages.classList.add('fade-out');
+                setTimeout(() => messages.remove(), 500);
+            }, 5000);
         }
-    }, 5000);
+    });
 </script>
 {% endif %}
 {% endblock %}

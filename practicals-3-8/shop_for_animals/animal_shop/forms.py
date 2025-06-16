@@ -6,8 +6,8 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['name', 'text']
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': 'Your name', 'class': 'input'}),
-            'text': forms.Textarea(attrs={'placeholder': 'Your comment...', 'class': 'textarea'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Your name'}),
+            'text': forms.Textarea(attrs={'placeholder': 'Your comment...'}),
         }
 
 class OrderForm(forms.ModelForm):
@@ -17,28 +17,23 @@ class OrderForm(forms.ModelForm):
         widgets = {
             'customer_name': forms.TextInput(attrs={
                 'placeholder': 'Full Name',
-                'class': 'input',
                 'required': True
             }),
             'customer_phone': forms.TextInput(attrs={
                 'placeholder': '+380 XX XXX XX XX',
-                'class': 'input',
                 'required': True,
                 'pattern': r'^\+?[\d\s\-\(\)]+$'
             }),
             'customer_email': forms.EmailInput(attrs={
-                'placeholder': 'your.email@example.com',
-                'class': 'input'
+                'placeholder': 'your.email@example.com'
             }),
             'delivery_address': forms.Textarea(attrs={
                 'placeholder': 'Enter your full delivery address...',
-                'class': 'textarea',
                 'rows': 3,
                 'required': True
             }),
             'notes': forms.Textarea(attrs={
                 'placeholder': 'Any special instructions for your order...',
-                'class': 'textarea',
                 'rows': 2
             }),
         }

@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block content %}
-<section class="welcome-section" style="margin-bottom: -2rem">
-    <h2 style="text-align: center;">Your Shopping Cart</h2>
+<section class="welcome-section">
+    <h2>Your Shopping Cart</h2>
 </section>
 
 <div class="container">
@@ -11,60 +11,57 @@
         {% if cart_items %}
             <div class="cart-items-section card">
                 <div class="section-header">
-                    <h3>🛒 Cart Items ({{ cart_count }} item{{ cart_count|pluralize }})</h3>
+                    <h3>🛒 Cart Items <span class="cart-count-badge">{{ cart_count }} item{{ cart_count|pluralize }}</span></h3>
                 </div>
 
                 {% for item in cart_items %}
-                <div class="cart-item" style="display: flex; gap: var(--spacing-unit); padding: var(--spacing-unit); border-bottom: var(--border-width) solid var(--sage); align-items: center;">
-                    <div class="item-image" style="flex-shrink: 0;">
+                <div class="cart-item">
+                    <div class="item-image">
                         {% if item.product.image %}
-                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 80px; height: 80px; object-fit: cover; border-radius: var(--border-radius);">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                         {% else %}
-                            <div style="width: 80px; height: 80px; background-color: var(--sage); display: flex; align-items: center; justify-content: center; border-radius: var(--border-radius); color: var(--plum);">No Image</div>
+                            <div>No Image</div>
                         {% endif %}
                     </div>
 
-                    <div class="item-details" style="flex-grow: 1;">
+                    <div class="item-details">
                         <h4>{{ item.product.name }}</h4>
-                        <p style="color: var(--plum); margin: 0.5rem 0;">£{{ item.price }} each</p>
-                        <div class="stock-indicator card card-stock" style="display: inline-flex;">
+                        <p>£{{ item.price }} each</p>
+                        <div class="stock-indicator card card-stock">
                             <div class="pulse-dot" style="background: {{ item.product.get_stock_display_color }};"></div>
                             <span>{{ item.product.get_stock_status_display }}</span>
                         </div>
                     </div>
 
-                    <div class="item-quantity" style="display: flex; align-items: center; gap: 0.5rem;">
-                        <form method="post" action="{% url 'update_cart' item.product.id %}" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div class="item-quantity">
+                        <form method="post" action="{% url 'update_cart' item.product.id %}">
                             {% csrf_token %}
-                            <label for="quantity-{{ item.product.id }}" style="font-size: var(--fs-small);">Qty:</label>
-                            <input type="number" name="quantity" id="quantity-{{ item.product.id }}" value="{{ item.quantity }}" min="1" max="99" style="width: 60px; padding: 0.25rem; text-align: center; border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">
-                            <button type="submit" class="btn btn-primary" style="font-size: var(--fs-small); padding: 0.25rem 0.5rem;">Update</button>
+                            <label for="quantity-{{ item.product.id }}">Qty:</label>
+                            <input type="number" name="quantity" id="quantity-{{ item.product.id }}" value="{{ item.quantity }}" min="1" max="99" onchange="this.form.submit()">
                         </form>
                     </div>
 
-                    <div class="item-total" style="text-align: right; min-width: 80px;">
-                        <p style="font-weight: bold; color: var(--plum); margin: 0;">£{{ item.total|floatformat:2 }}</p>
+                    <div class="item-total">
+                        <p>£{{ item.total|floatformat:2 }}</p>
                     </div>
 
                     <div class="item-remove">
-                        <a href="{% url 'remove_from_cart' item.product.id %}" class="btn" style="background: var(--coral); color: white; padding: 0.25rem 0.5rem; font-size: var(--fs-small);" onclick="return confirm('Remove this item from cart?')">Remove</a>
+                        <a href="{% url 'remove_from_cart' item.product.id %}" class="btn" onclick="return confirm('Remove this item from cart?')">Remove</a>
                     </div>
                 </div>
                 {% endfor %}
             </div>
 
             <div class="cart-summary card">
-                <div class="summary-content" style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-unit);">
+                <div class="summary-content">
                     <div class="summary-info">
                         <h3>Order Summary</h3>
                         <p>Total Items: {{ cart_count }}</p>
                     </div>
-                    <div class="summary-total" style="text-align: right;">
-                        <div class="total-price" style="font-size: var(--fs-large); font-weight: bold; color: var(--plum);">
-                            Total: £{{ total_price|floatformat:2 }}
-                        </div>
-                        <div class="checkout-actions" style="margin-top: var(--spacing-unit);">
-                            <a href="{% url 'checkout' %}" class="btn btn-primary" style="padding: var(--spacing-unit); font-size: var(--fs-medium);">
+                    <div class="summary-total">
+                        <div class="total-price">Total: £{{ total_price|floatformat:2 }}</div>
+                        <div class="checkout-actions">
+                            <a href="{% url 'checkout' %}" class="btn btn-primary">
                                 <span class="btn-icon">💳</span>
                                 <span class="btn-text">Proceed to Checkout</span>
                             </a>
@@ -74,17 +71,17 @@
             </div>
 
         {% else %}
-            <div class="empty-cart card" style="text-align: center; padding: calc(var(--spacing-unit) * 3);">
-                <div class="empty-icon" style="font-size: 4rem; margin-bottom: var(--spacing-unit);">🛒</div>
+            <div class="empty-cart card">
+                <div class="empty-icon">🛒</div>
                 <h3>Your cart is empty</h3>
-                <p style="margin: var(--spacing-unit) 0;">Looks like you haven't added any magical treats yet!</p>
+                <p>Looks like you haven't added any magical treats yet!</p>
                 <a href="{% url 'catalog' %}" class="btn btn-primary">
                     <span class="btn-text">Continue Shopping</span>
                 </a>
             </div>
         {% endif %}
 
-        <div class="cart-actions" style="margin-top: calc(var(--spacing-unit) * 2); text-align: center;">
+        <div class="cart-actions">
             <a href="{% url 'catalog' %}" class="btn btn-back">
                 <span>Continue Shopping</span>
             </a>
@@ -93,22 +90,12 @@
 </div>
 
 {% if messages %}
-<div class="messages" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+<div class="messages">
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}" style="background: {% if message.tags == 'success' %}var(--sage){% elif message.tags == 'error' %}var(--coral){% else %}var(--plum){% endif %}; color: white; padding: var(--spacing-unit); border-radius: var(--border-radius); margin-bottom: 0.5rem; max-width: 300px;">
+    <div class="alert alert-{{ message.tags }}">
         {{ message }}
     </div>
     {% endfor %}
 </div>
-
-<script>
-    setTimeout(function() {
-        const messages = document.querySelector('.messages');
-        if (messages) {
-            messages.style.opacity = '0';
-            setTimeout(() => messages.remove(), 500);
-        }
-    }, 5000);
-</script>
 {% endif %}
 {% endblock %}
