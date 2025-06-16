@@ -96,6 +96,10 @@ class Product(models.Model):
     def in_stock(self):
         return self.stock_status == 'in_stock'
 
+    @property
+    def out_of_stock(self):
+        return self.stock_status == 'out_of_stock'
+
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.pk])
 
@@ -163,7 +167,14 @@ class OrderItem(models.Model):
 
     @property
     def total_price(self):
+        if self.quantity is None or self.price is None:
+            return 0
         return self.quantity * self.price
+
+    def save(self, *args, **kwargs):
+        if not self.price and self.product:
+            self.price = self.product.price
+        super().save(*args, **kwargs)
 
 class Comment(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='comments')

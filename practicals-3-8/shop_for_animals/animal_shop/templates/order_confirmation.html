@@ -2,51 +2,46 @@
 {% load static %}
 
 {% block content %}
-<section class="welcome-section" style="margin-bottom: -2rem">
-    <h2 style="text-align: center;">Order Confirmation</h2>
+<section class="welcome-section">
+    <h2>Order Confirmation</h2>
 </section>
 
 <div class="container">
     <div class="product-page-wrapper">
-        <div class="confirmation-success card" style="text-align: center; padding: calc(var(--spacing-unit) * 3); margin-bottom: calc(var(--spacing-unit) * 2);">
-            <div class="success-icon" style="font-size: 4rem; margin-bottom: var(--spacing-unit); color: var(--sage);">✅</div>
-            <h2 style="color: var(--plum); margin-bottom: var(--spacing-unit);">Order Placed Successfully!</h2>
-            <p style="font-size: var(--fs-medium); margin-bottom: calc(var(--spacing-unit) * 2);">Thank you for your order. We'll process it shortly and contact you with delivery details.</p>
-
-            <div class="order-number" style="background: var(--sage); color: var(--plum); padding: var(--spacing-unit); border-radius: var(--border-radius); display: inline-block; font-weight: bold;">
-                Order #{{ order.pk }}
-            </div>
+        <div class="confirmation-success card">
+            <div class="success-icon">✅</div>
+            <h2>Order Placed Successfully!</h2>
+            <p>Thank you for your order. We'll process it shortly and contact you with delivery details.</p>
+            <div class="order-number">Order #{{ order.pk }}</div>
         </div>
 
-        <div class="order-details-wrapper" style="display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--spacing-unit) * 2); margin-bottom: calc(var(--spacing-unit) * 2);">
-
+        <div class="order-details-wrapper">
             <!-- Customer Information -->
             <div class="customer-info card">
                 <div class="section-header">
                     <h3>👤 Customer Information</h3>
                     <div class="header-line"></div>
                 </div>
-
-                <div class="info-content" style="padding: var(--spacing-unit);">
-                    <div class="info-item" style="margin-bottom: var(--spacing-unit);">
+                <div class="info-content">
+                    <div class="info-item">
                         <strong>Name:</strong> {{ order.customer_name }}
                     </div>
-                    <div class="info-item" style="margin-bottom: var(--spacing-unit);">
+                    <div class="info-item">
                         <strong>Phone:</strong> {{ order.customer_phone }}
                     </div>
                     {% if order.customer_email %}
-                    <div class="info-item" style="margin-bottom: var(--spacing-unit);">
+                    <div class="info-item">
                         <strong>Email:</strong> {{ order.customer_email }}
                     </div>
                     {% endif %}
-                    <div class="info-item" style="margin-bottom: var(--spacing-unit);">
+                    <div class="info-item">
                         <strong>Delivery Address:</strong><br>
-                        <span style="white-space: pre-line;">{{ order.delivery_address }}</span>
+                        <span>{{ order.delivery_address }}</span>
                     </div>
                     {% if order.notes %}
                     <div class="info-item">
                         <strong>Notes:</strong><br>
-                        <span style="white-space: pre-line;">{{ order.notes }}</span>
+                        <span>{{ order.notes }}</span>
                     </div>
                     {% endif %}
                 </div>
@@ -58,32 +53,29 @@
                     <h3>📦 Order Summary</h3>
                     <div class="header-line"></div>
                 </div>
-
-                <div class="summary-content" style="padding: var(--spacing-unit);">
+                <div class="summary-content">
                     <div class="order-items">
                         {% for item in order.items.all %}
-                        <div class="order-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: var(--border-width) solid var(--sage);">
+                        <div class="order-item">
                             <div class="item-info">
-                                <h5 style="margin: 0; font-size: var(--fs-small);">{{ item.product.name }}</h5>
-                                <p style="margin: 0; font-size: var(--fs-small); color: var(--plum);">£{{ item.price }} × {{ item.quantity }}</p>
+                                <h5>{{ item.product.name }}</h5>
+                                <p>£{{ item.price }} × {{ item.quantity }}</p>
                             </div>
-                            <div class="item-total" style="font-weight: bold;">
+                            <div class="item-total">
                                 £{{ item.total_price|floatformat:2 }}
                             </div>
                         </div>
                         {% endfor %}
                     </div>
-
-                    <div class="order-total" style="margin-top: var(--spacing-unit); padding-top: var(--spacing-unit); border-top: 2px solid var(--plum);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h3 style="margin: 0;">Total Amount:</h3>
-                            <h3 style="margin: 0; color: var(--plum);">£{{ order.total_amount|floatformat:2 }}</h3>
+                    <div class="order-total">
+                        <div class="order-total-content">
+                            <h3>Total Amount:</h3>
+                            <h3>£{{ order.total_amount|floatformat:2 }}</h3>
                         </div>
                     </div>
-
-                    <div class="order-status" style="margin-top: var(--spacing-unit); padding: var(--spacing-unit); background: var(--sage); border-radius: var(--border-radius); text-align: center;">
-                        <h4 style="margin: 0; color: var(--plum);">Current Status: {{ order.get_status_display }}</h4>
-                        <p style="margin: 0.5rem 0 0 0; font-size: var(--fs-small);">Order placed on {{ order.created_at|date:"F d, Y \a\t H:i" }}</p>
+                    <div class="order-status">
+                        <h4>Current Status: {{ order.get_status_display }}</h4>
+                        <p>Order placed on {{ order.created_at|date:"F d, Y \a\t H:i" }}</p>
                     </div>
                 </div>
             </div>
@@ -94,30 +86,29 @@
                 <h3>📋 What Happens Next?</h3>
                 <div class="header-line"></div>
             </div>
-
-            <div class="steps-content" style="padding: var(--spacing-unit);">
-                <div class="step-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-unit);">
-                    <div class="step-item" style="text-align: center; padding: var(--spacing-unit);">
-                        <div class="step-icon" style="font-size: 2rem; margin-bottom: 0.5rem;">📋</div>
+            <div class="steps-content">
+                <div class="step-grid">
+                    <div class="step-item">
+                        <div class="step-icon">📋</div>
                         <h4>Order Processing</h4>
-                        <p style="font-size: var(--fs-small);">We'll review and confirm your order within 2-4 hours during business hours.</p>
+                        <p>We'll review and confirm your order within 2-4 hours during business hours.</p>
                     </div>
-                    <div class="step-item" style="text-align: center; padding: var(--spacing-unit);">
-                        <div class="step-icon" style="font-size: 2rem; margin-bottom: 0.5rem;">📞</div>
+                    <div class="step-item">
+                        <div class="step-icon">📞</div>
                         <h4>Contact Confirmation</h4>
-                        <p style="font-size: var(--fs-small);">Our team will call you to confirm delivery details and schedule.</p>
+                        <p>Our team will call you to confirm delivery details and schedule.</p>
                     </div>
-                    <div class="step-item" style="text-align: center; padding: var(--spacing-unit);">
-                        <div class="step-icon" style="font-size: 2rem; margin-bottom: 0.5rem;">🚚</div>
+                    <div class="step-item">
+                        <div class="step-icon">🚚</div>
                         <h4>Delivery</h4>
-                        <p style="font-size: var(--fs-small);">Your magical treats will be delivered to your specified address.</p>
+                        <p>Your magical treats will be delivered to your specified address.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="confirmation-actions" style="text-align: center; margin-top: calc(var(--spacing-unit) * 2);">
-            <a href="{% url 'catalog' %}" class="btn btn-primary" style="margin-right: var(--spacing-unit);">
+        <div class="confirmation-actions">
+            <a href="{% url 'catalog' %}" class="btn btn-primary">
                 <span class="btn-text">Continue Shopping</span>
             </a>
             <a href="{% url 'home' %}" class="btn btn-back">
@@ -126,16 +117,4 @@
         </div>
     </div>
 </div>
-
-<style>
-@media (max-width: 768px) {
-    .order-details-wrapper {
-        grid-template-columns: 1fr !important;
-    }
-
-    .step-grid {
-        grid-template-columns: 1fr !important;
-    }
-}
-</style>
 {% endblock %}
