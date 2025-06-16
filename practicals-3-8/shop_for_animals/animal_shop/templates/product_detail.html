@@ -62,10 +62,27 @@
                 </div>
 
                 <div class="product-actions">
-                    <button class="btn btn-primary">
-                        <span class="btn-icon">🛒</span>
-                        <span class="btn-text">Add to Cart</span>
-                    </button>
+                    {% if product.in_stock %}
+                        <form method="post" action="{% url 'add_to_cart' product.id %}" style="display: flex; gap: var(--spacing-unit); align-items: end;">
+                            {% csrf_token %}
+                            <div class="quantity-selector" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <label for="quantity" style="font-size: var(--fs-small); font-weight: bold;">Quantity:</label>
+                                <input type="number" name="quantity" id="quantity" value="1" min="1" max="10" style="width: 70px; padding: 0.5rem; text-align: center; border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <span class="btn-icon">🛒</span>
+                                <span class="btn-text">Add to Cart</span>
+                            </button>
+                        </form>
+                    {% else %}
+                        <button class="btn" style="background-color: var(--coral); cursor: not-allowed;" disabled>
+                            <span class="btn-text">Out of Stock</span>
+                        </button>
+                    {% endif %}
+
+                    <a href="{% url 'cart' %}" class="btn btn-back" style="margin-top: var(--spacing-unit);">
+                        <span class="btn-text">View Cart</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -148,7 +165,14 @@
                                 <span class="price-amount">{{ item.price }}</span>
                             </div>
                             <div class="card-actions">
-                                <a class="btn">Buy</a>
+                                {% if item.in_stock %}
+                                    <form method="post" action="{% url 'add_to_cart' item.id %}" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn">Buy</button>
+                                    </form>
+                                {% else %}
+                                    <button class="btn" style="background-color: var(--coral); cursor: not-allowed;" disabled>Out of Stock</button>
+                                {% endif %}
                                 <a href="{% url 'product_detail' item.id %}" class="btn">Details</a>
                             </div>
                         </div>
@@ -169,4 +193,24 @@
         </div>
     </div>
 </div>
+
+{% if messages %}
+<div class="messages" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" style="background: {% if message.tags == 'success' %}var(--sage){% elif message.tags == 'error' %}var(--coral){% else %}var(--plum){% endif %}; color: white; padding: var(--spacing-unit); border-radius: var(--border-radius); margin-bottom: 0.5rem; max-width: 300px;">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    setTimeout(function() {
+        const messages = document.querySelector('.messages');
+        if (messages) {
+            messages.style.opacity = '0';
+            setTimeout(() => messages.remove(), 500);
+        }
+    }, 5000);
+</script>
+{% endif %}
 {% endblock %}
