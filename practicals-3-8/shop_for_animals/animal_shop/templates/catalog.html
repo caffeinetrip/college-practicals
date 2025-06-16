@@ -25,7 +25,7 @@
                         {% if selected_category %}
                         {{ selected_category.description|default:"Explore our selection of products in this category." }}
                         {% else %}
-                        Discover our complete range of magical and mundane pet products. Whether your companion has fur, feathers, scales, or something stranger—we’ve got you covered.
+                        Discover our complete range of magical and mundane pet products. Whether your companion has fur, feathers, scales, or something stranger—we've got you covered.
                         {% endif %}
                     </p>
                 </div>
@@ -45,45 +45,85 @@
             </div>
         </div>
 
-            <div class="grid">
-                {% for product in products %}
-                <div class="card product-card corner-tag" style="margin-bottom: calc(var(--spacing-unit) * 2);">
-                    <div class="card-image">
-                        {% if product.image %}
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" style="height: 120px; object-fit: cover; border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">
-                        {% else %}
-                        <div class="product-image" style="height: 120px; background-color: var(--sage); display: flex; align-items: center; justify-content: center; color: var(--plum); font-size: var(--fs-small); border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">No Image</div>
-                        {% endif %}
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">{{ product.name }}</h3>
-                        <div class="card-price">
-                            <span class="price-symbol">£</span>
-                            <span class="price-amount">{{ product.price }}</span>
-                        </div>
-                        <div class="stock-indicator card card-stock">
-                            <div class="pulse-dot" style="background: {{ product.get_stock_display_color }};"></div>
-                            <span>{{ product.get_stock_status_display }}</span>
-                        </div>
-                        <div class="card-actions" style="display: flex; gap: calc(var(--spacing-unit) * 0.5); flex-wrap: wrap;">
-                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">
-                                <span class="btn-icon">🛒</span>
-                                <span class="btn-text">Buy Now</span>
-                            </a>
-                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">
-                                <span class="btn-text">View Details</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                {% empty %}
-                <div class="card no-similar">
-                    <div class="empty-icon">🔍</div>
-                    <p>No products available at the moment. Please check back later!</p>
-                </div>
-                {% endfor %}
+        <!-- Cart Summary Bar -->
+        {% if request.session.cart %}
+        <div class="cart-summary-bar card" style="background: var(--sage); margin-bottom: calc(var(--spacing-unit) * 2); padding: var(--spacing-unit); display: flex; justify-content: space-between; align-items: center;">
+            <div class="cart-info">
+                <span style="font-weight: bold;">🛒 Cart: {{ request.session.cart|length }} item{{ request.session.cart|length|pluralize }}</span>
             </div>
-        </section>
+            <div class="cart-actions">
+                <a href="{% url 'cart' %}" class="btn btn-primary">View Cart</a>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="grid">
+            {% for product in products %}
+            <div class="card product-card corner-tag" style="margin-bottom: calc(var(--spacing-unit) * 2);">
+                <div class="card-image">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" style="height: 120px; object-fit: cover; border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">
+                    {% else %}
+                    <div class="product-image" style="height: 120px; background-color: var(--sage); display: flex; align-items: center; justify-content: center; color: var(--plum); font-size: var(--fs-small); border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">No Image</div>
+                    {% endif %}
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">{{ product.name }}</h3>
+                    <div class="card-price">
+                        <span class="price-symbol">£</span>
+                        <span class="price-amount">{{ product.price }}</span>
+                    </div>
+                    <div class="stock-indicator card card-stock">
+                        <div class="pulse-dot" style="background: {{ product.get_stock_display_color }};"></div>
+                        <span>{{ product.get_stock_status_display }}</span>
+                    </div>
+                    <div class="card-actions" style="display: flex; gap: calc(var(--spacing-unit) * 0.5); flex-wrap: wrap;">
+                        {% if product.in_stock %}
+                            <form method="post" action="{% url 'add_to_cart' product.id %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="btn-icon">🛒</span>
+                                    <span class="btn-text">Add to Cart</span>
+                                </button>
+                            </form>
+                        {% else %}
+                            <button class="btn" style="background-color: var(--coral); cursor: not-allowed;" disabled>
+                                <span class="btn-text">Out of Stock</span>
+                            </button>
+                        {% endif %}
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">
+                            <span class="btn-text">View Details</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="card no-similar">
+                <div class="empty-icon">🔍</div>
+                <p>No products available at the moment. Please check back later!</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
+
+{% if messages %}
+<div class="messages" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" style="background: {% if message.tags == 'success' %}var(--sage){% elif message.tags == 'error' %}var(--coral){% else %}var(--plum){% endif %}; color: white; padding: var(--spacing-unit); border-radius: var(--border-radius); margin-bottom: 0.5rem; max-width: 300px;">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    setTimeout(function() {
+        const messages = document.querySelector('.messages');
+        if (messages) {
+            messages.style.opacity = '0';
+            setTimeout(() => messages.remove(), 500);
+        }
+    }, 5000);
+</script>
+{% endif %}
 {% endblock %}
