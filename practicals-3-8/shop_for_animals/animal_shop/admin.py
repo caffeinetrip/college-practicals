@@ -68,7 +68,7 @@ class OrderAdmin(admin.ModelAdmin):
     def get_products(self, obj):
         items = obj.items.all()
         if not items:
-            return "Немає товарів"
+            return "None"
 
         products_list = []
         for item in items:
@@ -90,13 +90,13 @@ class OrderAdmin(admin.ModelAdmin):
 
         return format_html(result)
 
-    get_products.short_description = 'Товари'
+    get_products.short_description = 'Products'
     get_products.allow_tags = True
 
     def get_items_count(self, obj):
         return obj.items.count()
 
-    get_items_count.short_description = 'Кількість позицій'
+    get_items_count.short_description = 'Items count'
 
 
 @admin.register(Comment)
