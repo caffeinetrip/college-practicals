@@ -1,10 +1,10 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Product, Category
+from django.shortcuts import get_object_or_404, render, redirect
+from .models import Product, Category, Comment
+from .forms import CommentForm
 
 def home(request):
     featured_names = {'ChompStars', 'BlankBites', 'RootSnax'}
     featured = Product.objects.filter(name__in=featured_names, stock_status='in_stock')
-
     context = {
         'title': 'Home - Soma Animals',
         'page_name': 'Homepage',
@@ -13,24 +13,49 @@ def home(request):
     return render(request, 'home.html', context)
 
 def catalog(request):
-    products = Product.objects.filter(category__is_active=True)
     categories = Category.objects.filter(is_active=True)
+
+    category_id = request.GET.get('category')
+    selected_category = None
+    if category_id:
+        try:
+            selected_category = Category.objects.get(id=category_id, is_active=True)
+            products = Product.objects.filter(category__id=category_id, category__is_active=True)
+        except Category.DoesNotExist:
+            products = Product.objects.filter(category__is_active=True)
+    else:
+        products = Product.objects.filter(category__is_active=True)
 
     context = {
         'title': 'Catalog - Soma Animals',
         'page_name': 'Product Catalog',
         'categories': categories,
         'products': products,
+        'selected_category': selected_category,
     }
     return render(request, 'catalog.html', context)
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
+    similar_products = Product.objects.filter(category=product.category).exclude(pk=product.pk)[:3]
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.product = product
+            comment.save()
+            return redirect('product_detail', product_id=product.id)
+    else:
+        form = CommentForm()
+
+    comments = product.comments.order_by('-created_at')
 
     context = {
-        'title': f'{product.name} - Soma Animals',
-        'page_name': product.name,
         'product': product,
+        'similar_products': similar_products,
+        'form': form,
+        'comments': comments,
     }
     return render(request, 'product_detail.html', context)
 

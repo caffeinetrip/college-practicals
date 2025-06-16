@@ -1,29 +1,89 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<section class="catalog-intro-section">
-    <div class="card">
-        <h2>🛍️ Full Catalog</h2>
-        <p>Discover our complete range of magical and mundane pet products. Whether your companion has fur, feathers, scales, or something stranger—we’ve got you covered.</p>
-    </div>
+<section class="welcome-section" style="margin-bottom: -2rem">
+    <h2 style="text-align: center;">Welcome to Product Catalog</h2>
 </section>
 
-<section class="all-products">
-    <h2 style="text-align: center; margin-bottom: 2rem;">All Products</h2>
-    <div class="grid">
-        {% for product in products %}
-        <div class="card product-card corner-tag">
-            <h3>{{ product.name }}</h3>
-            <p class="product-price">£{{ product.price }}</p>
-            <div style="margin-top: 1rem;">
-                <a href="{% url 'product_detail' product.id %}" class="btn btn-outline">View Details</a>
+<div class="container">
+    <div class="product-page-wrapper">
+        <section class="catalog-intro-section" style="margin-bottom: -1rem">
+            <div class="card">
+                <div class="description-header">
+                    <h2>
+                        {% if selected_category %}
+                        {{ selected_category.name }}
+                        {% else %}
+                        🛍️ All Products
+                        {% endif %}
+                    </h2>
+                    <div class="header-line"></div>
+                </div>
+                <div class="description-content">
+                    <p>
+                        {% if selected_category %}
+                        {{ selected_category.description|default:"Explore our selection of products in this category." }}
+                        {% else %}
+                        Discover our complete range of magical and mundane pet products. Whether your companion has fur, feathers, scales, or something stranger—we’ve got you covered.
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="category-filter card" style="margin-bottom: calc(var(--spacing-unit) * 2); overflow-x: auto; white-space: nowrap; padding: var(--spacing-unit);">
+            <div style="display: inline-flex; gap: calc(var(--spacing-unit) * 0.5);">
+                <a href="{% url 'catalog' %}" class="btn btn-primary {% if not request.GET.category %}active{% endif %}">
+                    <span class="btn-text">All</span>
+                </a>
+                {% for category in categories %}
+                <a href="{% url 'catalog' %}?category={{ category.id }}" class="btn btn-primary {% if request.GET.category == category.id|stringformat:'s' %}active{% endif %}">
+                    <span class="btn-text">{{ category.name }}</span>
+                </a>
+                {% endfor %}
             </div>
         </div>
-        {% empty %}
-        <div class="card">
-            <p>No products available at the moment. Please check back later!</p>
-        </div>
-        {% endfor %}
+
+            <div class="grid">
+                {% for product in products %}
+                <div class="card product-card corner-tag" style="margin-bottom: calc(var(--spacing-unit) * 2);">
+                    <div class="card-image">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" style="height: 120px; object-fit: cover; border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">
+                        {% else %}
+                        <div class="product-image" style="height: 120px; background-color: var(--sage); display: flex; align-items: center; justify-content: center; color: var(--plum); font-size: var(--fs-small); border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">No Image</div>
+                        {% endif %}
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">{{ product.name }}</h3>
+                        <div class="card-price">
+                            <span class="price-symbol">£</span>
+                            <span class="price-amount">{{ product.price }}</span>
+                        </div>
+                        <div class="stock-indicator card card-stock">
+                            <div class="pulse-dot" style="background: {{ product.get_stock_display_color }};"></div>
+                            <span>{{ product.get_stock_status_display }}</span>
+                        </div>
+                        <div class="card-actions" style="display: flex; gap: calc(var(--spacing-unit) * 0.5); flex-wrap: wrap;">
+                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">
+                                <span class="btn-icon">🛒</span>
+                                <span class="btn-text">Buy Now</span>
+                            </a>
+                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">
+                                <span class="btn-text">View Details</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="card no-similar">
+                    <div class="empty-icon">🔍</div>
+                    <p>No products available at the moment. Please check back later!</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
     </div>
-</section>
+</div>
 {% endblock %}

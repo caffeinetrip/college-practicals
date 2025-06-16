@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="welcome-section" style="margin-bottom: -2rem">
+    <h2 style="text-align: center;">{{ product.name }}</h2>
+</section>
+
+<div class="container">
+    <div class="product-page-wrapper">
+        <div class="product-showcase grid-2col">
+            <div class="product-gallery">
+                {% if product.image %}
+                    <div class="main-image card">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="product-info card">
+                <div class="price-section">
+                    <div class="price-tag">
+                        <span class="currency">£</span>
+                        <span class="amount">{{ product.price }}</span>
+                    </div>
+                    <div class="price-badge">Best Price</div>
+                </div>
+
+                <div class="stock-indicator card card-stock">
+                    <div class="pulse-dot" style="background: {{ product.get_stock_display_color }};"></div>
+                    <span>{{ product.get_stock_status_display }}</span>
+                </div>
+
+                <div class="product-specs">
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <div class="spec-content">
+                                <span class="spec-label">Manufacturer</span>
+                                <span class="spec-value">{{ product.manufacturer }}</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-content">
+                                <span class="spec-label">Country</span>
+                                <span class="spec-value">{{ product.get_country_display }}</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-content">
+                                <span class="spec-label">Type</span>
+                                <span class="spec-value">{{ product.get_product_type_display }}</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-content">
+                                <span class="spec-label">Package</span>
+                                <span class="spec-value">{{ product.package }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-actions">
+                    <button class="btn btn-primary">
+                        <span class="btn-icon">🛒</span>
+                        <span class="btn-text">Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-description card">
+            <div class="description-header">
+                <h3>📝 Product Description</h3>
+                <div class="header-line"></div>
+            </div>
+            <div class="description-content">
+                <p style="margin-top: 1rem">{{ product.description }}</p>
+            </div>
+        </div>
+
+        <div class="comments-section card">
+            <div class="section-header">
+                <h3>💬 Customer Reviews</h3>
+                <div class="comment-count" style="margin-top: 1rem; margin-bottom: 1rem">{{ comments|length }} review{{ comments|length|pluralize }}</div>
+            </div>
+
+            <div class="comments-container">
+                {% for comment in comments %}
+                    <div class="comment-box">
+                        <div class="comment-header">
+                            <div class="comment-meta">
+                                <span class="comment-author">{{ comment.name }}</span>
+                                <span class="comment-date">{{ comment.created_at|date:"d M Y" }}</span>
+                            </div>
+                        </div>
+                        <div class="comment-text">
+                            <p>{{ comment.text }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="no-comments">
+                        <h4>No reviews yet</h4>
+                        <p>Be the first to share your experience!</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="add-comment-section card">
+            <div class="comment-form-wrapper">
+                <h2 style="text-align: center; margin-bottom: 1rem;">Share Your Experience</h2>
+                <form method="post" class="comment-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            {{ form.name }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="textarea-wrapper">
+                            {{ form.text }}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-submit">
+                        <p>Submit Review</p>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="similar-products-section card">
+            <div class="section-header">
+                <h3 style="margin-bottom: 1rem">You Might Also Like</h3>
+            </div>
+
+            <div class="grid-similar">
+                {% for item in similar_products %}
+                    <div class="card corner-tag">
+                        <div class="card-image">
+                            <div class="product-badge-small">Hot</div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <div class="card-price">
+                                <span class="price-symbol">£</span>
+                                <span class="price-amount">{{ item.price }}</span>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn">Buy</a>
+                                <a href="{% url 'product_detail' item.id %}" class="btn">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="no-similar">
+                        <div class="empty-icon">🔍</div>
+                        <p>No similar products found</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="back-to-catalog">
+            <a href="{% url 'catalog' %}" class="btn btn-back">
+                <span>Back to Catalog</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

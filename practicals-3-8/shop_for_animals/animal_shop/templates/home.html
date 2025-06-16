@@ -1,64 +1,110 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<section class="welcome-section">
-    <div class="card">
-        <h2>🏠 Welcome to Soma Animals!</h2>
-        <p>Your trusted companion in pet wellness. We offer a wide range of unique products, expert advice, and convenient services to care for your creature’s needs.</p>
-        <div style="margin-top: 1rem;">
-            <a href="{% url 'catalog' %}" class="btn btn-primary">🛒 Browse Catalog</a>
-        </div>
-    </div>
-</section>
-
-<section class="featured-products">
-    <h2 style="text-align: center; margin-bottom: 2rem;">Popular Products</h2>
-    <div class="grid">
-        {% for product in featured_products %}
-        <div class="card product-card corner-tag">
-            <h3>{{ product.name }}</h3>
-            <p class="product-price">£{{ product.price }}</p>
-            <p class="product-description">{{ product.description }}</p>
-            <div style="margin-top: 1rem;">
-                <a href="{% url 'product_detail' product.id %}" class="btn btn-outline">Details</a>
+<div class="home">
+    <section class="welcome-section" style="margin-bottom: -2rem">
+        <div class="card">
+            <div class="description-header">
+                <h2>🏠 Welcome to Soma Animals!</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="description-content">
+                <p>Your trusted companion in pet wellness. We offer a wide range of unique products, expert advice, and convenient services to care for your creature’s needs.</p>
+            </div>
+            <div style="margin-top: calc(var(--spacing-unit) * 2); text-align: center;">
+                <a href="{% url 'catalog' %}" class="btn btn-primary">
+                    <span class="btn-icon">🛒</span>
+                    <span class="btn-text">Browse Catalog</span>
+                </a>
             </div>
         </div>
-        {% endfor %}
+    </section>
+
+    <div class="product-page-wrapper">
+        <section class="featured-products" style="margin-top: 1rem">
+            <h2 style="text-align: center; margin-bottom: calc(var(--spacing-unit) * 2);">Popular Products</h2>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                {% for product in featured_products %}
+                <div class="card product-card corner-tag" style="margin-bottom: calc(var(--spacing-unit) * 2);">
+                    <div class="card-image">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" style="height: 120px; object-fit: cover; border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">
+                        {% else %}
+                        <div class="product-image" style="height: 120px; background-color: var(--sage); display: flex; align-items: center; justify-content: center; color: var(--plum); font-size: var(--fs-small); border: var(--border-width) solid var(--plum); border-radius: var(--border-radius);">No Image</div>
+                        {% endif %}
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">{{ product.name }}</h3>
+                        <div class="card-price">
+                            <span class="price-symbol">£</span>
+                            <span class="price-amount">{{ product.price }}</span>
+                        </div>
+                        <div class="stock-indicator card card-stock">
+                            <div class="pulse-dot" style="background: {{ product.get_stock_display_color }};"></div>
+                            <span>{{ product.get_stock_status_display }}</span>
+                        </div>
+                        <div class="card-actions" style="display: flex; gap: calc(var(--spacing-unit) * 0.5); flex-wrap: wrap;">
+                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">
+                                <span class="btn-icon">🛒</span>
+                                <span class="btn-text">Buy Now</span>
+                            </a>
+                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">
+                                <span class="btn-text">View Details</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="card no-similar" style="grid-column: 1 / -1;">
+                    <div class="empty-icon">🔍</div>
+                    <p>No featured products available at the moment.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="services-section" style="margin-top: -1rem">
+            <h2 style="text-align: center; margin-bottom: calc(var(--spacing-unit) * 2);">Our Services</h2>
+            <div class="grid">
+                <div class="card corner-tag">
+                    <div class="card-content">
+                        <h3 class="card-title">🩺 Expert Consultations</h3>
+                        <p>Our certified pet pharmacists offer detailed guidance on exotic and experimental pet products.</p>
+                    </div>
+                </div>
+                <div class="card corner-tag">
+                    <div class="card-content">
+                        <h3 class="card-title">🚚 Fast Delivery</h3>
+                        <p>Get your order within 2 hours in the city. Free shipping for orders over £12.00.</p>
+                    </div>
+                </div>
+                <div class="card corner-tag">
+                    <div class="card-content">
+                        <h3 class="card-title">📊 Vital Checkups</h3>
+                        <p>Free monitoring of heartbeat, fur glow, and inner radiance levels.</p>
+                    </div>
+                </div>
+                <div class="card corner-tag">
+                    <div class="card-content">
+                        <h3 class="card-title">🕐 24/7 Support</h3>
+                        <p>Emergency help and consultations available any time of day or night.</p>
+                    </div>
+                </div>
+                <div class="card corner-tag">
+                    <div class="card-content">
+                        <h3 class="card-title">🧪 Ritual Prep Services</h3>
+                        <p>We prepare pets for full moon rituals and seasonal transformations.</p>
+                    </div>
+                </div>
+                <div class="card corner-tag">
+                    <div class="card-content">
+                        <h3 class="card-title">🎭 Personality Mapping</h3>
+                        <p>Analyze and visualize your pet’s emotional spectrum and hidden fears.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-</section>
-
-<section class="services-section">
-    <h2 style="text-align: center; margin-bottom: 2rem;">Our Services</h2>
-    <div class="grid">
-        <div class="card corner-tag">
-            <h3>🩺 Expert Consultations</h3>
-            <p>Our certified pet pharmacists offer detailed guidance on exotic and experimental pet products.</p>
-        </div>
-
-        <div class="card corner-tag">
-            <h3>🚚 Fast Delivery</h3>
-            <p>Get your order within 2 hours in the city. Free shipping for orders over £12.00.</p>
-        </div>
-
-        <div class="card corner-tag">
-            <h3>📊 Vital Checkups</h3>
-            <p>Free monitoring of heartbeat, fur glow, and inner radiance levels.</p>
-        </div>
-
-        <div class="card corner-tag">
-            <h3>🕐 24/7 Support</h3>
-            <p>Emergency help and consultations available any time of day or night.</p>
-        </div>
-
-        <div class="card corner-tag">
-            <h3>🧪 Ritual Prep Services</h3>
-            <p>We prepare pets for full moon rituals and seasonal transformations.</p>
-        </div>
-
-        <div class="card corner-tag">
-            <h3>🎭 Personality Mapping</h3>
-            <p>Analyze and visualize your pet’s emotional spectrum and hidden fears.</p>
-        </div>
-    </div>
-</section>
+</div>
 {% endblock %}
